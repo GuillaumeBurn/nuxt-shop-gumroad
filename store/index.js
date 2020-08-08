@@ -1,7 +1,11 @@
 export const state = () => {
   return {
     products: [],
-    product: {}
+    product: {},
+    emailProvider: {
+      username: "alberta71@ethereal.email",
+      password: "BJgwmJJetZMDqstnwX"
+    }
   };
 };
 // Getters are like computed properties but for Vuex
@@ -14,7 +18,10 @@ export const getters = {
   icons: state => state.products.filter(el => el.custom_summary === "Icons"),
   mockups: state =>
     state.products.filter(el => el.custom_summary === "Mockups"),
-  uiKit: state => state.products.filter(el => el.custom_summary === "Ui Kit")
+  uiKit: state => state.products.filter(el => el.custom_summary === "Ui Kit"),
+  emailProvider(state) {
+    return state.emailProvider;
+  }
 };
 /* 
     Actions are generally used to send request to a server.
@@ -29,6 +36,21 @@ export const actions = {
   /* Single product */
   setProduct({ commit }, product) {
     commit("SET_PRODUCT", product);
+  },
+  async sendEmail({ state, commit }, payload) {
+    let emailInfo = payload;
+    let emailProvider = state.emailProvider;
+    if (emailProvider.username !== "" && emailProvider.password !== "") {
+      try {
+        const { res } = await this.$axios.post("/api/contact", {
+          emailInfo,
+          emailProvider
+        });
+        alert("Message send successfully");
+      } catch (e) {
+        alert(e);
+      }
+    }
   }
 };
 /* 
@@ -42,6 +64,9 @@ export const mutations = {
   },
   SET_PRODUCT(state, product) {
     state.product = product;
+  },
+  setNewEmailProvider(state, payload) {
+    state.emailProvider = payload;
   }
 };
 

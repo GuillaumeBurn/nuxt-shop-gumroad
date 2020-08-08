@@ -59,5 +59,10 @@ module.exports = {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
-  }
+  },
+  serverMiddleware: [
+    // Will register file from project api directory to handle /api/* requires
+    { path: "/api/contact", handler: "~/api/index.js" },
+
+  ]
 };

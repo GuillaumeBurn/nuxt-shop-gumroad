@@ -1,28 +1,42 @@
 <template>
-  <form @submit="sendEmail">
+  <form>
     <fieldset>
-      <inputField
+      <div
+        :class="'inputField' + '--' + input.styling"
         v-for="input in inputs"
         :key="input.idName"
-        :idName="input.idName"
-        :name="input.name"
-        :labelTitle="input.labelTitle"
-        :placeHolder="input.placeHolder"
-        :styling="input.styling"
-        :type="input.type"
-        :v-model="input.dataBinding"
-      />
+      >
+        <label class="inputField__label" :for="input.name">{{
+          input.labelTitle
+        }}</label>
+        <input
+          class="inputField__input"
+          :id="input.idName"
+          :name="input.name"
+          :placeholder="input.placeHolder"
+          :type="input.type"
+          v-model="input.dataBinding"
+        />
+      </div>
     </fieldset>
     <fieldset>
-      <InputArea
+      <div
+        :class="'inputArea' + '--' + content.styling"
         v-for="content in area"
         :key="content.name"
-        :name="content.name"
-        :labelTitle="content.labelTitle"
-        :v-model="content.dataBinding"
-      />
+      >
+        <label class="inputArea__label" :for="content.name">{{
+          content.labelTitle
+        }}</label>
+        <textarea
+          class="inputArea__area"
+          :id="content.name"
+          v-model="content.dataBinding"
+          maxlength="250"
+        ></textarea>
+      </div>
     </fieldset>
-    <button type="submit" value="Send">Submit</button>
+    <button type="button" value="Send" @click="sendEmail()">Submit</button>
   </form>
 </template>
 <style lang="scss">
@@ -47,11 +61,58 @@
     margin-top: 32px;
   }
 }
+.inputField {
+  $self: &;
+  &--underline {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    #{ $self }__label {
+      color: black;
+      font-size: 21px;
+    }
+    #{ $self }__input {
+      border: 0;
+      border-bottom: 3px solid black;
+      background-color: transparent;
+      color: black;
+      font-size: 16px;
+      margin-bottom: 32px;
+      height: 45px;
+      &:focus {
+        outline: none;
+      }
+      &::placeholder {
+        font-size: 16px;
+      }
+    }
+  }
+}
+.inputArea {
+  $self: &;
+  &--outline {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    #{ $self }__label {
+      color: black;
+      font-size: 21px;
+      margin-bottom: 12px;
+    }
+    #{ $self }__area {
+      background-color: transparent;
+      border: 3px solid black;
+      color: black;
+      font-size: 16px;
+      min-height: 200px;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
 </style>
 <script>
-import InputField from "@/components/InputField";
-import InputArea from "@/components/InputArea";
-
 export default {
   data() {
     return {
@@ -62,7 +123,7 @@ export default {
           labelTitle: "Full name",
           placeHolder: "Your Name",
           styling: "underline",
-          dataBinding: "nameBinding"
+          dataBinding: ""
         },
         {
           name: "email",
@@ -71,38 +132,35 @@ export default {
           placeHolder: "Email Address",
           styling: "underline",
           type: "email",
-          dataBinding: "emailBinding"
+          dataBinding: ""
         }
       ],
       area: [
         {
           name: "projectdescription",
           labelTitle: "Project Details",
-          dataBinding: "messageBinding"
+          dataBinding: "",
+          styling: "outline"
         }
-      ],
-      nameBinding: "",
-      emailBinding: "",
-      messageBinding: ""
+      ]
     };
   },
   methods: {
     sendEmail() {
-      const emailData = {
-        email: this.emailBinding,
-        name: this.nameBinding,
-        message: this.messageBinding
-      };
-      this.$store.dispatch("sendEmail", emailData);
-      this.nameBinding = "";
-      this.emailBinding = "";
-      this.messageBinding = "";
-      console.log(emailData);
+      if(this.inputs[1].dataBinding !== ''){
+        const emailData = {
+          email: this.inputs[1].dataBinding,
+          name: this.inputs[0].dataBinding,
+          message: this.area[0].dataBinding
+        };
+        this.$store.dispatch("sendEmail", emailData);
+        this.inputs[1].dataBinding = "";
+        this.inputs[0].dataBinding = "";
+        this.area[0].dataBinding = "";
+      } else {
+        alert("Please enter email address");
+      }
     }
-  },
-  components: {
-    InputField,
-    InputArea
   }
 };
 </script>
