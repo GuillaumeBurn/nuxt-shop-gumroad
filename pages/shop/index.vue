@@ -7,7 +7,7 @@ import ProductGrid from "@/layouts/partials/ProductGrid";
 export default {
   head() {
     return {
-      title: "Klarr Shop",
+      title: "Shop",
       meta: [
         {
           name: "description",

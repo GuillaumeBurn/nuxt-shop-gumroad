@@ -44,6 +44,7 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 12px;
+    border-radius: 16px;
     width: 100%;
   }
 }
