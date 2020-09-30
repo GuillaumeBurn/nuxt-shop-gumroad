@@ -2,7 +2,7 @@
   <ProductGrid :data="products" />
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 import ProductGrid from "@/layouts/partials/ProductGrid";
 export default {
   head() {
@@ -22,7 +22,9 @@ export default {
   },
   middleware: "products",
   computed: {
-    ...mapState(["products"])
+    ...mapGetters({
+      products: "getProducts"
+    })
   }
 };
 </script>

@@ -1,16 +1,26 @@
+import * as Filters from "~/helpers/filters";
 export const state = () => {
   return {
     products: [],
+    filteredProducts: [],
     product: {},
     emailProvider: {
       username: "alberta71@ethereal.email",
       password: "BJgwmJJetZMDqstnwX"
+    },
+    filter: {
+      search: "",
+      order: "1",
+      pricerange: 100,
+      min: 0,
+      max: 100
     }
   };
 };
 // Getters are like computed properties but for Vuex
 export const getters = {
-  product: state => state.product,
+  getProduct: state => state.product,
+  getProducts: state => state.products,
   apparels: state =>
     state.products.filter(el => el.custom_summary === "Apparels"),
   freebies: state =>
@@ -21,11 +31,58 @@ export const getters = {
   uiKit: state => state.products.filter(el => el.custom_summary === "Ui Kit"),
   emailProvider(state) {
     return state.emailProvider;
+  },
+  getFilteredProducts(state) {
+    return state.filteredProducts;
   }
 };
 /* 
-    Actions are generally used to send request to a server.
-    Usualt Actions resolve into some data.
+	Mutations are simple function that have access to a state.
+	Mutations are used to assign values to a state.
+*/
+export const mutations = {
+  /* State and posts arguments are receive from commit */
+  SET_PRODUCTS(state, products) {
+    state.products = products;
+  },
+  SET_PRODUCT(state, product) {
+    state.product = product;
+  },
+  setNewEmailProvider(state, payload) {
+    state.emailProvider = payload;
+  },
+  setFilteredProducts(state, products) {
+    state.filteredProducts = products;
+  },
+  setFilterPrice(state, price) {
+    state.filter.pricerange = price;
+  },
+  setFilterSearch(state, search) {
+    state.filter.search = search;
+  },
+  clearProducts(state) {
+    state.products = [];
+  },
+  filterProducts(state) {
+    const products = [...state.products];
+    state.filteredProducts = products;
+    state.filteredProducts = Filters.filterProducts(state.filter, products);
+  },
+  setOrder(state, order) {
+    state.filter.order = order;
+  },
+  orderProducts(state) {
+    const products = [...state.filteredProducts];
+    state.filteredProducts = Filters.orderProducts(
+      state.filter.order,
+      products
+    );
+  }
+};
+
+/* 
+	Actions are generally used to send request to a server.
+	Usualt Actions resolve into some data.
 */
 
 export const actions = {
@@ -36,6 +93,9 @@ export const actions = {
   /* Single product */
   setProduct({ commit }, product) {
     commit("SET_PRODUCT", product);
+  },
+  setFilteredProducts({ commit }, products) {
+	commit('setFilteredProducts', products);
   },
   async sendEmail({ state, commit }, payload) {
     let emailInfo = payload;
@@ -51,28 +111,31 @@ export const actions = {
         alert(e);
       }
     }
-  }
-};
-/* 
-    Mutations are simple function that have access to a state.
-    Mutations are used to assign values to a state.
-*/
-export const mutations = {
-  /* State and posts arguments are receive from commit */
-  SET_PRODUCTS(state, products) {
-    state.products = products;
   },
-  SET_PRODUCT(state, product) {
-    state.product = product;
+  async filterOrder({ commit }, order) {
+    await commit("setOrder", order);
+    await commit("orderProducts");
   },
-  setNewEmailProvider(state, payload) {
-    state.emailProvider = payload;
+  async filterPrice({ commit, dispatch }, price) {
+    await commit("setFilterPrice", price);
+    dispatch("filterProducts");
+  },
+  async filterSearch({ commit, dispatch }, search) {
+    await commit("setFilterSearch", search);
+    dispatch("filterProducts");
+  },
+  async filterProducts({ commit }) {
+    await commit("filterProducts");
+    await commit("orderProducts");
+  },
+  async clearProducts({ commit }) {
+    await commit("clearProducts");
   }
 };
 
 export default {
   state,
   getters,
-  actions,
-  mutations
+  mutations,
+  actions
 };

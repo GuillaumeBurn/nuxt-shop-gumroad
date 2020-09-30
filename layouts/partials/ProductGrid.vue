@@ -53,10 +53,20 @@
             type="search"
             placeholder="Search"
             v-model="search"
+            @input="handleSearch"
           />
         </section>
         <section class="filters">
-          <Dropdown />
+          <Dropdown
+            label="Sort by:"
+            :items="[
+              { id: 1, name: 'Newest', value: 'newest' },
+              { id: 2, name: 'Price: Low to High', value: 'ltoh' },
+              { id: 3, name: 'Price: High to Low', value: 'htol' },
+              { id: 4, name: 'Best sellers', value: 'bs' }
+            ]"
+			v-on:changeOrder="handleOrder($event)"
+          />
           <div class="slider">
             <p style="margin-top: 5px">
               Max Price
@@ -72,6 +82,7 @@
                 :min="min"
                 :max="max"
                 step="1"
+                @input="handlePrice"
               />
               <span class="max">${{ max }}</span>
             </div>
@@ -81,7 +92,7 @@
       <section>
         <ul class="products">
           <ProductItem
-            v-for="product in products"
+            v-for="product in filteredProducts"
             :key="product.id"
             :id="product.id"
             :preview_url="product.preview_url"
@@ -218,12 +229,21 @@ aside {
 }
 </style>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import ProductItem from "@/components/ProductItem";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Dropdown from "@/components/Dropdown";
 
 export default {
+  data: function() {
+    return {
+      search: "",
+      order: 1,
+      pricerange: 100,
+      min: 0,
+      max: 100
+    };
+  },
   props: {
     data: {
       required: true
@@ -235,9 +255,30 @@ export default {
     Dropdown
   },
   computed: {
-    products() {
-      return this.data;
-    }
+    ...mapGetters({
+      products: "getProducts",
+      filteredProducts: "getFilteredProducts",
+      product: "getProduct"
+    })
+  },
+  methods: {
+    handleSearch() {
+      this.$store.dispatch("filterSearch", this.search);
+    },
+    handlePrice() {
+      this.$store.dispatch("filterPrice", this.pricerange);
+	},
+	handleOrder(value) {
+		if(value == "1") {
+			this.$store.dispatch('setFilteredProducts', this.products);
+		} else {
+			this.order = value
+			this.$store.dispatch('filterOrder', this.order);
+		}
+	}
+  },
+  mounted() {
+	  this.handleSearch();
   }
 };
 </script>

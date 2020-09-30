@@ -4,10 +4,15 @@
     <details id="dropdown_select" class="dropdown__container">
       <summary class="dropdown__summary">Filtre</summary>
       <ul class="dropdown__list">
-        <li class="dropdown__option">
-          <input :id="id" :type="type" :name="group_name" :value="item_name" />
-          <label class="dropdown__option--label" :for="id">
-            {{ item_name }}
+        <li class="dropdown__option" v-for="item in items" :key="item.id">
+          <input
+            :id="item.id"
+            type="radio"
+            :name="item.name"
+            :value="item.value"
+          />
+          <label class="dropdown__option--label" :for="item.id">
+            {{ item.name }}
           </label>
         </li>
       </ul>
@@ -88,33 +93,21 @@
 <script>
 export default {
   props: {
-    id: {
-      type: String,
-      required: true
+    items: {
+      type: Array
     },
     label: {
       type: String,
-      default: "Short by:"
-    },
-    item_name: {
-      type: String,
-      required: true
-    },
-    type: {
-      type: String,
-      default: "radio"
-    },
-    group_name: {
-      type: Boolean,
-      required: false
+      default: "Sort by:"
     }
   },
   mounted() {
+    var that = this;
     class detailSelect {
       constructor(container) {
         this.container = document.querySelector(container);
         this.options = document.querySelectorAll(
-          `${container} > .dropdown__list > .dropdown__option`
+          `${container} > .dropdown__list > .dropdown__option input`
         );
         this.value = this.container.querySelector("summary").textContent;
         this.mouseDown = false;
@@ -125,21 +118,10 @@ export default {
 
       // Private function to set event listeners
       _addEventListeners() {
-        this.container.addEventListener("toggle", () => {
-          if (this.container.open) return;
-          this.updateValue();
-        });
-
-        this.container.addEventListener("focusout", e => {
-          if (this.mouseDown) return;
-          this.container.removeAttribute("open");
-        });
-
         this.options.forEach(opt => {
-          opt.addEventListener("mousedown", () => {
-            this.mouseDown = true;
-          });
-          opt.addEventListener("mouseup", () => {
+          opt.addEventListener("click", e => {
+            that.$emit("changeOrder", e.target.id);
+            this.setValue(e.target);
             this.mouseDown = false;
             this.container.removeAttribute("open");
           });
@@ -197,7 +179,7 @@ export default {
         selectBox.querySelector("[type=radio]").setAttribute("role", "option");
       }
 
-      updateValue(e) {
+      updateValue() {
         const that = this.container.querySelector("input:checked");
         if (!that) return;
         this.setValue(that);
