@@ -1,5 +1,5 @@
 <template>
-  <ProductGrid :data="products" />
+  <ProductGrid />
 </template>
 <script>
 import { mapGetters } from "vuex";
@@ -25,6 +25,14 @@ export default {
     ...mapGetters({
       products: "getProducts"
     })
+  },
+  methods: {
+    handleSearch() {
+      this.$store.dispatch("filterSearch", "");
+    },
+  },
+  mounted() {
+    this.handleSearch();
   }
 };
 </script>

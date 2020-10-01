@@ -1,6 +1,6 @@
 <template>
   <div class="pageWrapper">
-    <ProductGrid :data="mockups" />
+    <ProductGrid />
   </div>
 </template>
 <script>
@@ -11,8 +11,14 @@ export default {
     ProductGrid
   },
 
-  computed: {
-    ...mapGetters(["mockups"])
+  methods: {
+    handleProductsByCategory() {
+      this.$store.dispatch('setFilteredProductsByCategory', 'Mockups');
+    }
+  },
+
+  mounted() {
+    this.handleProductsByCategory();
   }
 };
 </script>

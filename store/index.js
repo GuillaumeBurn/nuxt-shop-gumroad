@@ -25,10 +25,6 @@ export const getters = {
     state.products.filter(el => el.custom_summary === "Apparels"),
   freebies: state =>
     state.products.filter(el => el.custom_summary === "Freebies"),
-  icons: state => state.products.filter(el => el.custom_summary === "Icons"),
-  mockups: state =>
-    state.products.filter(el => el.custom_summary === "Mockups"),
-  uiKit: state => state.products.filter(el => el.custom_summary === "Ui Kit"),
   emailProvider(state) {
     return state.emailProvider;
   },
@@ -68,6 +64,9 @@ export const mutations = {
     state.filteredProducts = products;
     state.filteredProducts = Filters.filterProducts(state.filter, products);
   },
+  filterProductsByCategory(state, category) {
+    state.filteredProducts = state.products.filter(el => el.custom_summary === category)
+  },
   setOrder(state, order) {
     state.filter.order = order;
   },
@@ -95,7 +94,10 @@ export const actions = {
     commit("SET_PRODUCT", product);
   },
   setFilteredProducts({ commit }, products) {
-	commit('setFilteredProducts', products);
+	  commit('setFilteredProducts', products);
+  },
+  setFilteredProductsByCategory({ commit }, category) {
+    commit('filterProductsByCategory', category);
   },
   async sendEmail({ state, commit }, payload) {
     let emailInfo = payload;

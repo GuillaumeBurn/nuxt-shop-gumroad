@@ -244,11 +244,6 @@ export default {
       max: 100
     };
   },
-  props: {
-    data: {
-      required: true
-    }
-  },
   components: {
     Breadcrumbs,
     ProductItem,
@@ -267,18 +262,15 @@ export default {
     },
     handlePrice() {
       this.$store.dispatch("filterPrice", this.pricerange);
-	},
-	handleOrder(value) {
-		if(value == "1") {
-			this.$store.dispatch('setFilteredProducts', this.products);
-		} else {
-			this.order = value
-			this.$store.dispatch('filterOrder', this.order);
-		}
-	}
-  },
-  mounted() {
-	  this.handleSearch();
+    },
+    handleOrder(value) {
+      if(value == "1") {
+        this.$store.dispatch('setFilteredProducts', this.products);
+      } else {
+        this.order = value
+        this.$store.dispatch('filterOrder', this.order);
+      }
+    }
   }
 };
 </script>
