@@ -19,6 +19,7 @@ export const state = () => {
 };
 // Getters are like computed properties but for Vuex
 export const getters = {
+  product: state => state.product,
   getProduct: state => state.product,
   getProducts: state => state.products,
   apparels: state =>

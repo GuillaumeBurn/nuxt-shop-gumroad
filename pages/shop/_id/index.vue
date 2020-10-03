@@ -23,6 +23,7 @@ export default {
       id: this.$route.params.id
     };
   },
+  middleware: "product",
   computed: {
     ...mapGetters(["product"])
   }
