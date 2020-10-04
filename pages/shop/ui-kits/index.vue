@@ -10,16 +10,13 @@ export default {
   components: {
     ProductGrid
   },
-
   methods: {
-    handleProductsByCategory() {
-      this.$store.dispatch('setFilteredProductsByCategory', 'Ui Kit');
-    }
+    handleCategory() {
+      this.$store.dispatch("filterCategory", "Ui Kit");
+    },
   },
-
   mounted() {
-    this.handleProductsByCategory();
+    this.handleCategory();
   }
-
 };
 </script>

@@ -237,9 +237,9 @@ import Dropdown from "@/components/Dropdown";
 export default {
   data: function() {
     return {
-      search: "",
-      order: 1,
-      pricerange: 100,
+      search: this.$store.getters.getSearch,
+      order: this.$store.getters.getOrder,
+      pricerange: this.$store.getters.getPricerange,
       min: 0,
       max: 100
     };
@@ -265,7 +265,7 @@ export default {
     },
     handleOrder(value) {
       if(value == "1") {
-        this.$store.dispatch('setFilteredProducts', this.products);
+        this.$store.dispatch("filterSearch", "");
       } else {
         this.order = value
         this.$store.dispatch('filterOrder', this.order);

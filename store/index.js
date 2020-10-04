@@ -13,7 +13,8 @@ export const state = () => {
       order: "1",
       pricerange: 100,
       min: 0,
-      max: 100
+      max: 100,
+      category: ""
     }
   };
 };
@@ -22,6 +23,10 @@ export const getters = {
   product: state => state.product,
   getProduct: state => state.product,
   getProducts: state => state.products,
+  getCategory: state => state.filter.category,
+  getSearch: state => state.filter.search,
+  getOrder: state => state.filter.order,
+  getPricerange: state => state.filter.pricerange,
   apparels: state =>
     state.products.filter(el => el.custom_summary === "Apparels"),
   freebies: state =>
@@ -65,11 +70,11 @@ export const mutations = {
     state.filteredProducts = products;
     state.filteredProducts = Filters.filterProducts(state.filter, products);
   },
-  filterProductsByCategory(state, category) {
-    state.filteredProducts = state.products.filter(el => el.custom_summary === category)
-  },
   setOrder(state, order) {
     state.filter.order = order;
+  },
+  setCategory(state, category) {
+    state.filter.category = category;
   },
   orderProducts(state) {
     const products = [...state.filteredProducts];
@@ -97,9 +102,6 @@ export const actions = {
   setFilteredProducts({ commit }, products) {
 	  commit('setFilteredProducts', products);
   },
-  setFilteredProductsByCategory({ commit }, category) {
-    commit('filterProductsByCategory', category);
-  },
   async sendEmail({ state, commit }, payload) {
     let emailInfo = payload;
     let emailProvider = state.emailProvider;
@@ -118,6 +120,10 @@ export const actions = {
   async filterOrder({ commit }, order) {
     await commit("setOrder", order);
     await commit("orderProducts");
+  },
+  async filterCategory({ commit, dispatch }, category) {
+    await commit('setCategory', category);
+    dispatch("filterProducts");
   },
   async filterPrice({ commit, dispatch }, price) {
     await commit("setFilterPrice", price);

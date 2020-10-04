@@ -11,12 +11,12 @@ export default {
     ProductGrid
   },
   methods: {
-    handleProductsByCategory() {
-      this.$store.dispatch('setFilteredProductsByCategory', 'Icons');
-    }
+    handleCategory() {
+      this.$store.dispatch("filterCategory", "Icons");
+    },
   },
   mounted() {
-    this.handleProductsByCategory();
+    this.handleCategory();
   }
 };
 </script>

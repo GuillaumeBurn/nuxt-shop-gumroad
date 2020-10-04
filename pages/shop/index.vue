@@ -21,17 +21,16 @@ export default {
     ProductGrid
   },
   middleware: "products",
-  computed: {
-    ...mapGetters({
-      products: "getProducts"
-    })
-  },
   methods: {
     handleSearch() {
       this.$store.dispatch("filterSearch", "");
     },
+    handleCategory() {
+      this.$store.dispatch("filterCategory", "");
+    },
   },
   mounted() {
+    this.handleCategory();
     this.handleSearch();
   }
 };

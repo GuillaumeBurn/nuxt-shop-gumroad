@@ -1,6 +1,12 @@
 export function filterProducts(filter, products) {
   let filteredList = [...products];
 
+  // Filter category
+  if(filter.category !== "") {
+    const filtered = filteredList.filter(product => product.custom_summary === filter.category);
+    filteredList = filtered;
+  }
+
   // Filter status
   if (filter.pricerange <= 100) {
     const filtered = filteredList.filter(
