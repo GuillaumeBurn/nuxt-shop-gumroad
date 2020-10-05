@@ -109,6 +109,11 @@ export default {
         this.options = document.querySelectorAll(
           `${container} > .dropdown__list > .dropdown__option input`
         );
+        this.options.forEach(opt => {
+          if(opt.id == that.$store.getters.getOrder) {
+            this.setChecked(opt);
+          }
+        });
         this.value = this.container.querySelector("summary").textContent;
         this.mouseDown = false;
         this._addEventListeners();

@@ -22,16 +22,12 @@ export default {
   },
   middleware: "products",
   methods: {
-    handleSearch() {
-      this.$store.dispatch("filterSearch", "");
-    },
     handleCategory() {
       this.$store.dispatch("filterCategory", "");
     },
   },
   mounted() {
     this.handleCategory();
-    this.handleSearch();
   }
 };
 </script>

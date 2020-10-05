@@ -124,6 +124,7 @@ export const actions = {
   async filterCategory({ commit, dispatch }, category) {
     await commit('setCategory', category);
     dispatch("filterProducts");
+    await commit("orderProducts");
   },
   async filterPrice({ commit, dispatch }, price) {
     await commit("setFilterPrice", price);
