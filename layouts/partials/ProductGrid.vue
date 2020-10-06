@@ -265,7 +265,7 @@ export default {
     },
     handleOrder(value) {
       if(value == "1") {
-        this.$store.dispatch("filterSearch", "");
+        this.$store.dispatch("setFilteredProducts", this.products);
       } else {
         this.order = value
         this.$store.dispatch('filterOrder', this.order);

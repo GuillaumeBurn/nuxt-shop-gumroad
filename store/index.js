@@ -67,7 +67,6 @@ export const mutations = {
   },
   filterProducts(state) {
     const products = [...state.products];
-    state.filteredProducts = products;
     state.filteredProducts = Filters.filterProducts(state.filter, products);
   },
   setOrder(state, order) {
