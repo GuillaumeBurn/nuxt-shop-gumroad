@@ -264,12 +264,11 @@ export default {
       this.$store.dispatch("filterPrice", this.pricerange);
     },
     handleOrder(value) {
+      this.order = value
       if(value == "1") {
         this.$store.dispatch("setFilteredProducts", this.products);
-      } else {
-        this.order = value
-        this.$store.dispatch('filterOrder', this.order);
       }
+      this.$store.dispatch('filterOrder', this.order);
     }
   }
 };

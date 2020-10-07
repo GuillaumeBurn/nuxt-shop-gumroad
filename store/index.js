@@ -50,32 +50,29 @@ export const mutations = {
   SET_PRODUCT(state, product) {
     state.product = product;
   },
-  setNewEmailProvider(state, payload) {
-    state.emailProvider = payload;
-  },
-  setFilteredProducts(state, products) {
+  SET_FILTERED_PRODUCTS(state, products) {
     state.filteredProducts = products;
   },
-  setFilterPrice(state, price) {
+  SET_FILTER_PRICE(state, price) {
     state.filter.pricerange = price;
   },
-  setFilterSearch(state, search) {
+  SET_FILTER_SEARCH(state, search) {
     state.filter.search = search;
   },
-  clearProducts(state) {
+  CLEAR_PRODUCTS(state) {
     state.products = [];
   },
-  filterProducts(state) {
+  FILTER_PRODUCTS(state) {
     const products = [...state.products];
     state.filteredProducts = Filters.filterProducts(state.filter, products);
   },
-  setOrder(state, order) {
+  SET_ORDER(state, order) {
     state.filter.order = order;
   },
-  setCategory(state, category) {
+  SET_CATEGORY(state, category) {
     state.filter.category = category;
   },
-  orderProducts(state) {
+  ORDER_PRODUCTS(state) {
     const products = [...state.filteredProducts];
     state.filteredProducts = Filters.orderProducts(
       state.filter.order,
@@ -98,8 +95,8 @@ export const actions = {
   setProduct({ commit }, product) {
     commit("SET_PRODUCT", product);
   },
-  setFilteredProducts({ commit }, products) {
-	  commit('setFilteredProducts', products);
+  async setFilteredProducts({ commit }, products) {
+	  await commit('SET_FILTERED_PRODUCTS', products);
   },
   async sendEmail({ state, commit }, payload) {
     let emailInfo = payload;
@@ -116,29 +113,28 @@ export const actions = {
       }
     }
   },
-  async filterOrder({ commit }, order) {
-    await commit("setOrder", order);
-    await commit("orderProducts");
+  async filterOrder({ commit, dispatch }, order) {
+    await commit("SET_ORDER", order);
+    dispatch("filterProducts");
   },
   async filterCategory({ commit, dispatch }, category) {
-    await commit('setCategory', category);
+    await commit('SET_CATEGORY', category);
     dispatch("filterProducts");
-    await commit("orderProducts");
   },
   async filterPrice({ commit, dispatch }, price) {
-    await commit("setFilterPrice", price);
+    await commit("SET_FILTER_PRICE", price);
     dispatch("filterProducts");
   },
   async filterSearch({ commit, dispatch }, search) {
-    await commit("setFilterSearch", search);
+    await commit("SET_FILTER_SEARCH", search);
     dispatch("filterProducts");
   },
   async filterProducts({ commit }) {
-    await commit("filterProducts");
-    await commit("orderProducts");
+    await commit("FILTER_PRODUCTS");
+    await commit("ORDER_PRODUCTS");
   },
   async clearProducts({ commit }) {
-    await commit("clearProducts");
+    await commit("CLEAR_PRODUCTS");
   }
 };
 
