@@ -1,6 +1,9 @@
 export function filterProducts(filter, products) {
   let filteredList = [...products];
 
+  const filtered = filteredList.filter(product => product.subscription_duration === null);
+  filteredList = filtered;
+
   // Filter category
   if(filter.category !== "") {
     const filtered = filteredList.filter(product => product.custom_summary === filter.category);
