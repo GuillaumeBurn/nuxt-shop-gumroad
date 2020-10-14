@@ -1,5 +1,11 @@
 <template>
-  <div>
+  <div
+    :class="{
+      'dark-theme': hasDark,
+      'light-theme': !hasDark,
+      'blog-post': isBlogPost
+    }"
+  >
     <Nav />
     <nuxt />
   </div>
@@ -9,6 +15,25 @@ import Nav from "./partials/nav";
 export default {
   components: {
     Nav
+  },
+  data() {
+    return {
+      id: this.$route.params.id,
+      hasDark: false,
+      isBlogPost: false
+    };
+  },
+  created() {
+    this.routeChanged();
+  },
+  watch: {
+    $route: "routeChanged"
+  },
+  methods: {
+    routeChanged() {
+      this.hasDark = this.$route.path === `/contact`;
+      this.isBlogPost = this.$route.path === `/blog/${this.id}`;
+    }
   }
 };
 </script>

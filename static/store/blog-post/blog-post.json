@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "name": "Article 1",
+      "id": "q16Zkveat9mV7_e8FQr5zg==",
+      "img": "/img/wireframes.webp",
+      "svgPlaceholder": "<svg style='border-radius: 12px;' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'><defs/><filter id='a'><feGaussianBlur stdDeviation='50'/></filter><rect width='100%' height='100%' fill='#664439'/><g filter='url(#a)'><g fill-opacity='.5' transform='matrix(7.5 0 0 7.5 3.8 3.8)'><circle cx='83' cy='143' r='113' fill='#c6f4ff'/><circle r='1' transform='matrix(-8.24699 193.00074 -28.02334 -1.19745 236.7 84.4)'/><path d='M9 147l86-4-87-32z'/><circle r='1' fill='#cedde5' transform='rotate(-68.4 92 17.5) scale(24.16205 108.15018)'/><circle cx='174' cy='2' r='41' fill='#071008'/><circle r='1' transform='matrix(9.69227 31.50779 -15.47446 4.76018 29.7 15.6)'/><path fill='#905738' d='M228.4 46.2L142 42.3l23 71.2L217.9 79z'/><circle r='1' fill='#000908' transform='rotate(-65.5 222.7 -101.8) scale(83.77966 27.14834)'/></g></g></svg>",
+      "author": "Guillaume Bernier",
+      "date": "",
+      "categorie": "design",
+      "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+    },
+    {
+      "name": "Article 2",
+      "id": "vnGGhxbNruLoM2ZqWPbNng==",
+      "img": "/img/server.webp",
+      "svgPlaceholder": "<svg style='border-radius: 12px;' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'><defs/><filter id='a'><feGaussianBlur stdDeviation='50'/></filter><rect width='100%' height='100%' fill='#3c4443'/><g filter='url(#a)'><g fill-opacity='.5' transform='matrix(7.5 0 0 7.5 3.8 3.8)'><ellipse cx='117' cy='59' fill='#8f8a8f' rx='101' ry='76'/><ellipse cx='108' cy='59' fill='#cccfcf' rx='35' ry='6'/><path fill='#5c5c5f' d='M139 0h102v125H139z'/><ellipse cx='127' cy='107' fill='#c5c7c8' rx='106' ry='3'/><ellipse cx='105' cy='9' fill='#babcbc' rx='66' ry='4'/><ellipse cx='115' cy='139' fill='#3d3c40' rx='245' ry='24'/><path fill='#eeecef' d='M248 3l-19 5 3 12z'/><circle r='1' fill='#37393b' transform='matrix(13.3397 24.87844 -14.66988 7.86592 31.3 76.3)'/></g></g></svg>",
+      "categorie": "code",
+      "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+    },
+    {
+      "name": "Article 3",
+      "id": "WNxKnugiUi56ZNGmVwBYSg==",
+      "img": "/img/freelancer.webp",
+      "svgPlaceholder": "<svg style='border-radius: 12px;' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'><defs/><filter id='a'><feGaussianBlur stdDeviation='50'/></filter><rect width='100%' height='100%' fill='#463434'/><g filter='url(#a)'><g fill-opacity='.5' transform='matrix(7.5 0 0 7.5 3.8 3.8)'><circle r='1' fill='#b6ceb2' transform='matrix(-5.9853 78.21786 -45.18528 -3.45762 40.8 136.4)'/><ellipse cx='64' cy='4' fill='#fff4d7' rx='255' ry='12'/><circle r='1' fill='#40a5b7' transform='matrix(-90.8947 -9.25066 2.01726 -19.82109 249.8 81)'/><ellipse cx='3' cy='125' fill='#fff' rx='88' ry='4'/><path fill='#07212c' d='M215 139L47 11l-20 91z'/><path fill='#70c6d2' d='M12 60h47v37H12z'/><circle r='1' fill='#fff1bd' transform='matrix(-24.36453 24.49619 -10.31223 -10.2568 12 133.7)'/><ellipse cx='177' cy='28' fill='#010a15' rx='252' ry='14'/></g></g></svg>",
+      "author": "Guillaume Bernier",
+      "date": "",
+      "categorie": "business",
+      "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+    },
+    {
+      "name": "Article 4",
+      "id": "sKxKnugiUi56ZNGmVwBYSg==",
+      "img": "/img/instagram.webp",
+      "svgPlaceholder": "<svg style='border-radius: 12px;' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'><defs/><filter id='a'><feGaussianBlur stdDeviation='50'/></filter><rect width='100%' height='100%' fill='#354b64'/><g filter='url(#a)'><g fill-opacity='.5' transform='matrix(7.5 0 0 7.5 3.8 3.8)'><circle cx='132' cy='76' r='153'/><ellipse cx='126' cy='72' fill='#92aec7' rx='107' ry='19'/><circle r='1' transform='matrix(-242.47765 0 0 -24.35076 127.8 22)'/><ellipse cx='109' cy='130' rx='255' ry='30'/><ellipse cx='249' cy='70' rx='21' ry='143'/><circle r='1' transform='rotate(-8.7 149.2 -531) scale(250.72532 30.20779)'/><path d='M240 159l-256-27 287-48z'/><circle r='1' fill='#a7c3e0' transform='matrix(-8.83745 5.96093 -9.98815 -14.80804 145.6 72.7)'/></g></g></svg>",
+      "author": "Guillaume Bernier",
+      "date": "",
+      "categorie": "marketing",
+      "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+    },
+    {
+      "name": "Article 5",
+      "id": "UWxKnugiUi56ZNGmVwBYSg==",
+      "img": "/img/gumroad-api.webp",
+      "svgPlaceholder": "<svg style='border-radius: 12px;' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'><defs/><filter id='a'><feGaussianBlur stdDeviation='50'/></filter><rect width='100%' height='100%' fill='#474138'/><g filter='url(#a)'><g fill-opacity='.5' transform='matrix(7.5 0 0 7.5 3.8 3.8)'><circle r='1' fill='#a97d60' transform='matrix(41.6381 59.99925 -89.44214 62.07078 110.8 59.8)'/><ellipse cx='173' cy='85' fill='#525443' rx='53' ry='92'/><circle r='1' fill='#a7765c' transform='matrix(-7.46782 -97.89483 33.49206 -2.55491 89.6 110.5)'/><path fill='#b9e800' d='M242.1 72.8l-9.2-22.2 38.1 51.1v24.6z'/><circle r='1' fill='#39453b' transform='matrix(9.3577 -3.02098 27.99956 86.73063 125.2 59.3)'/><path fill='#001e1e' d='M19.3-7.4L119 103.4l-2.3 2L17-5.4z'/><circle r='1' fill='#ba7f69' transform='matrix(9.89619 -4.76271 12.01312 24.96142 138.2 22.7)'/><circle r='1' fill='#856f4d' transform='matrix(6.22153 -1.34514 24.052 111.2449 193.8 96.3)'/></g></g></svg>",
+      "author": "Guillaume Bernier",
+      "date": "",
+      "categorie": "code",
+      "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+    }
+  ]
+}

@@ -38,6 +38,7 @@
     <main id="maincontent">
       <section class="optionMenu">
         <section class="search">
+          <!-- <InputSearch /> -->
           <svg
             class="search__icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +66,7 @@
               { id: 3, name: 'Price: High to Low', value: 'htol' },
               { id: 4, name: 'Best sellers', value: 'bs' }
             ]"
-			v-on:changeOrder="handleOrder($event)"
+            v-on:changeOrder="handleOrder($event)"
           />
           <div class="slider">
             <p style="margin-top: 5px">
@@ -233,6 +234,7 @@ import { mapState, mapGetters } from "vuex";
 import ProductItem from "@/components/ProductItem";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Dropdown from "@/components/Dropdown";
+import InputSearch from "@/components/InputSearch";
 
 export default {
   data: function() {
@@ -247,7 +249,8 @@ export default {
   components: {
     Breadcrumbs,
     ProductItem,
-    Dropdown
+    Dropdown,
+    InputSearch
   },
   computed: {
     ...mapGetters({
@@ -264,11 +267,11 @@ export default {
       this.$store.dispatch("filterPrice", this.pricerange);
     },
     handleOrder(value) {
-      this.order = value
-      if(value == "1") {
+      this.order = value;
+      if (value == "1") {
         this.$store.dispatch("setFilteredProducts", this.products);
       }
-      this.$store.dispatch('filterOrder', this.order);
+      this.$store.dispatch("filterOrder", this.order);
     }
   }
 };

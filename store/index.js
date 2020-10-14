@@ -1,9 +1,12 @@
 import * as Filters from "~/helpers/filters";
+import blogPost from "~/static/store/blog-post/blog-post.json";
+
 export const state = () => {
   return {
     products: [],
     filteredProducts: [],
     product: {},
+    blogPost: blogPost.data,
     emailProvider: {
       username: "alberta71@ethereal.email",
       password: "BJgwmJJetZMDqstnwX"
@@ -36,7 +39,8 @@ export const getters = {
   },
   getFilteredProducts(state) {
     return state.filteredProducts;
-  }
+  },
+  blogPost: state => state.blogPost
 };
 /* 
 	Mutations are simple function that have access to a state.
@@ -96,7 +100,7 @@ export const actions = {
     commit("SET_PRODUCT", product);
   },
   async setFilteredProducts({ commit }, products) {
-	  await commit('SET_FILTERED_PRODUCTS', products);
+    await commit("SET_FILTERED_PRODUCTS", products);
   },
   async sendEmail({ state, commit }, payload) {
     let emailInfo = payload;
@@ -118,7 +122,7 @@ export const actions = {
     dispatch("filterProducts");
   },
   async filterCategory({ commit, dispatch }, category) {
-    await commit('SET_CATEGORY', category);
+    await commit("SET_CATEGORY", category);
     dispatch("filterProducts");
   },
   async filterPrice({ commit, dispatch }, price) {
