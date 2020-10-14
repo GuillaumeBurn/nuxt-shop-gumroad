@@ -1,8 +1,8 @@
 <template>
-  <ProductGrid :data="products" />
+  <ProductGrid />
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 import ProductGrid from "@/layouts/partials/ProductGrid";
 export default {
   head() {
@@ -21,8 +21,13 @@ export default {
     ProductGrid
   },
   middleware: "products",
-  computed: {
-    ...mapState(["products"])
+  methods: {
+    handleCategory() {
+      this.$store.dispatch("filterCategory", "");
+    },
+  },
+  mounted() {
+    this.handleCategory();
   }
 };
 </script>

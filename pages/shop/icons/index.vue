@@ -1,6 +1,6 @@
 <template>
   <div class="pageWrapper">
-    <ProductGrid :data="icons" />
+    <ProductGrid />
   </div>
 </template>
 <script>
@@ -10,9 +10,13 @@ export default {
   components: {
     ProductGrid
   },
-
-  computed: {
-    ...mapGetters(["icons"])
+  methods: {
+    handleCategory() {
+      this.$store.dispatch("filterCategory", "Icons");
+    },
+  },
+  mounted() {
+    this.handleCategory();
   }
 };
 </script>

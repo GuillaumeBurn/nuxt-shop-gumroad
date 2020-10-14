@@ -1,6 +1,6 @@
 <template>
   <div class="pageWrapper">
-    <ProductGrid :data="uiKit" />
+    <ProductGrid />
   </div>
 </template>
 <script>
@@ -10,9 +10,13 @@ export default {
   components: {
     ProductGrid
   },
-
-  computed: {
-    ...mapGetters(["uiKit"])
+  methods: {
+    handleCategory() {
+      this.$store.dispatch("filterCategory", "Ui Kit");
+    },
+  },
+  mounted() {
+    this.handleCategory();
   }
 };
 </script>
