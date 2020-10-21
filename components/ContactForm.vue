@@ -1,40 +1,10 @@
 <template>
   <form>
-    <fieldset>
-      <div
-        :class="'inputField' + '--' + input.styling"
-        v-for="input in inputs"
-        :key="input.idName"
-      >
-        <label class="inputField__label" :for="input.name">{{
-          input.labelTitle
-        }}</label>
-        <input
-          class="inputField__input"
-          :id="input.idName"
-          :name="input.name"
-          :placeholder="input.placeHolder"
-          :type="input.type"
-          v-model="input.dataBinding"
-        />
-      </div>
+    <fieldset v-for="input in inputs">
+        <InputField :labelTitle="input.labelTitle" :id="input.idName" :name="input.name" :placeholder="input.placeHolder" :type="input.type" v-on:changeValue="input.method($event)" />
     </fieldset>
-    <fieldset>
-      <div
-        :class="'inputArea' + '--' + content.styling"
-        v-for="content in area"
-        :key="content.name"
-      >
-        <label class="inputArea__label" :for="content.name">{{
-          content.labelTitle
-        }}</label>
-        <textarea
-          class="inputArea__area"
-          :id="content.name"
-          v-model="content.dataBinding"
-          maxlength="250"
-        ></textarea>
-      </div>
+    <fieldset v-for="content in area">
+        <InputArea :labelTitle="content.labelTitle" :name="content.name" v-on:changeValue="content.method($event)" />
     </fieldset>
     <button type="button" value="Send" @click="sendEmail()">Submit</button>
   </form>
@@ -113,6 +83,8 @@
 }
 </style>
 <script>
+import InputField from "@/components/InputField";
+import InputArea from "@/components/InputArea";
 export default {
   data() {
     return {
@@ -123,7 +95,10 @@ export default {
           labelTitle: "Full name",
           placeHolder: "Your Name",
           styling: "underline",
-          dataBinding: ""
+          data: "",
+          method: function(e) {
+            this.data = e;
+          },
         },
         {
           name: "email",
@@ -132,35 +107,45 @@ export default {
           placeHolder: "Email Address",
           styling: "underline",
           type: "email",
-          dataBinding: ""
-        }
+          data: "",
+          method: function(e) {
+            this.data = e;
+          }
+        },
       ],
       area: [
         {
           name: "projectdescription",
           labelTitle: "Project Details",
-          dataBinding: "",
-          styling: "outline"
-        }
-      ]
+          styling: "outline",
+          data: "",
+          method: function(e) {
+            this.data = e;
+          }
+        },
+      ],
     };
+  },
+  components: {
+    InputField,
+    InputArea,
   },
   methods: {
     sendEmail() {
-      if(this.inputs[1].dataBinding !== ''){
+      if (this.inputs[1].data !== "") {
         const emailData = {
-          email: this.inputs[1].dataBinding,
-          name: this.inputs[0].dataBinding,
-          message: this.area[0].dataBinding
+          email: this.inputs[1].data,
+          name: this.inputs[0].data,
+          message: this.area[0].data,
         };
         this.$store.dispatch("sendEmail", emailData);
-        this.inputs[1].dataBinding = "";
-        this.inputs[0].dataBinding = "";
-        this.area[0].dataBinding = "";
+        this.inputs[1].data = "";
+        this.inputs[0].data = "";
+        this.area[0].data = "";
       } else {
         alert("Please enter email address");
       }
-    }
-  }
+    },
+  },
 };
 </script>

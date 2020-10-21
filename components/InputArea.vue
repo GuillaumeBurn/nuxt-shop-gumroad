@@ -4,8 +4,8 @@
     <textarea
       class="inputArea__area"
       :id="name"
-      :v-model="dataBinding"
       maxlength="250"
+      @input="changeValue($event)"
     ></textarea>
   </div>
 </template>
@@ -57,9 +57,11 @@ export default {
           ].indexOf(value) !== -1
         );
       }
-    },
-    dataBinding: {
-      type: String
+    }
+  },
+  methods: {
+    changeValue(e) {
+      this.$emit('changeValue', e.target.value);
     }
   }
 };

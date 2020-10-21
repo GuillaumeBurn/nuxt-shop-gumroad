@@ -14,8 +14,8 @@
       id="input-value"
       class="search__input"
       type="search"
-      placeholder="Search"
-      value=""
+      :value="data"
+      @input="handleSearch($event)"
     />
   </div>
 </template>
@@ -47,5 +47,16 @@
 }
 </style>
 <script>
-export default {};
+export default {
+  props: {
+    data: {
+      type: String
+    },
+  },
+  methods: {
+    handleSearch(e) {
+      this.$emit('changeValue', e.target.value);
+    },
+  }
+};
 </script>
