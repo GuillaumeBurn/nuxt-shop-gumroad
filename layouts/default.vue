@@ -35,9 +35,7 @@ export default {
   },
   watch: {
     $route: function() {
-      if (this.isSidebar && window.innerWidth < 768) {
-        this.$store.dispatch("nav/toggleSidebar");
-      }
+      this.$store.dispatch("nav/toggleSidebar");
     },
     $route: "routeChanged"
   },

@@ -9,7 +9,35 @@
     <div v-if="isSidebar" class="backdrop" @click="hideSidebar"></div>
     <transition name="slide-side">
       <div v-if="isSidebar" class="sidenav">
-        <Nav />
+        <nav class="mainNav">
+          <ul class="mainNav__list">
+            <li class="mainNav__item" @click="hideSidebar">
+              <nuxt-link class="mainNav__link hover__link" to="/">
+                Home
+              </nuxt-link>
+            </li>
+            <li class="mainNav__item" @click="hideSidebar">
+              <nuxt-link class="mainNav__link hover__link" to="/shop">
+                Shop
+              </nuxt-link>
+            </li>
+            <li class="mainNav__item" @click="hideSidebar">
+              <nuxt-link class="mainNav__link hover__link" to="/blog">
+                Blog
+              </nuxt-link>
+            </li>
+            <li class="mainNav__item" @click="hideSidebar">
+              <nuxt-link class="mainNav__link hover__link" to="/about">
+                About
+              </nuxt-link>
+            </li>
+            <li class="mainNav__item" @click="hideSidebar">
+              <nuxt-link class="mainNav__link hover__link" to="/contact">
+                Contact
+              </nuxt-link>
+            </li>
+          </ul>
+        </nav>
       </div>
     </transition>
   </div>
@@ -103,7 +131,6 @@
 </style>
 <script>
 import { mapGetters } from "vuex";
-import Nav from "@/layouts/partials/nav";
 import lottie from "@/plugins/lottie";
 import burgerMenu from "~/static/animation/menu.json";
 export default {
@@ -116,9 +143,6 @@ export default {
         }
       ]
     };
-  },
-  components: {
-    Nav
   },
   methods: {
     hideSidebar() {
