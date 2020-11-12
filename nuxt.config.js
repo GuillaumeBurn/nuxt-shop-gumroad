@@ -27,7 +27,10 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: "~/plugins/axios", mode: "server" }],
+  plugins: [
+    { src: "~/plugins/axios", mode: "server" },
+    { src: "~/plugins/lottie", mode: "client" }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -62,7 +65,6 @@ module.exports = {
   },
   serverMiddleware: [
     // Will register file from project api directory to handle /api/* requires
-    { path: "/api/contact", handler: "~/api/index.js" },
-
+    { path: "/api/contact", handler: "~/api/index.js" }
   ]
 };

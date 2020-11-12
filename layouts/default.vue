@@ -6,15 +6,18 @@
       'blog-post': isBlogPost
     }"
   >
-    <Nav />
+    <Header />
+    <Drawer />
     <nuxt />
   </div>
 </template>
 <script>
-import Nav from "./partials/nav";
+import Header from "./partials/header";
+import Drawer from "@/components/Drawer";
 export default {
   components: {
-    Nav
+    Header,
+    Drawer
   },
   data() {
     return {
@@ -25,7 +28,17 @@ export default {
   created() {
     this.routeChanged();
   },
+  computed: {
+    isSidebar() {
+      return this.$store.getters["nav/toggleSidebar"];
+    }
+  },
   watch: {
+    $route: function() {
+      if (this.isSidebar && window.innerWidth < 768) {
+        this.$store.dispatch("nav/toggleSidebar");
+      }
+    },
     $route: "routeChanged"
   },
   methods: {
