@@ -18,7 +18,6 @@ export default {
   },
   data() {
     return {
-      id: this.$route.params.id,
       hasDark: false,
       isBlogPost: false
     };
@@ -32,7 +31,7 @@ export default {
   methods: {
     routeChanged() {
       this.hasDark = this.$route.path === `/contact`;
-      this.isBlogPost = this.$route.path === `/blog/${this.id}`;
+      this.isBlogPost = this.$route.path === `/blog/${this.$route.params.id}`;
     }
   }
 };

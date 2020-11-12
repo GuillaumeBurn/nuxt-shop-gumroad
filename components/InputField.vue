@@ -7,7 +7,7 @@
       :name="name"
       :placeholder="placeHolder"
       :type="type"
-      :v-model="dataBinding"
+      @input="changeValue($event)"
     />
   </div>
 </template>
@@ -81,9 +81,11 @@ export default {
           ) !== -1
         );
       }
-    },
-    dataBinding: {
-      type: String
+    }
+  },
+  methods: {
+    changeValue(e) {
+      this.$emit('changeValue', e.target.value);
     }
   }
 };
