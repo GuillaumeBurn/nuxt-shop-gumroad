@@ -1,0 +1,65 @@
+// breakpoints map
+$breakpoints: (
+    // 512px
+        xs: 32rem,
+    // 768px
+        sm: 48rem,
+    // 1152px
+        md: 72rem,
+    // 1536px
+        lg: 96rem,
+    // 1632px
+        xl: 102rem,
+    // 1920px
+        xx: 120rem
+);
+@mixin breakpoint($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        @media ( max-width: #{ map-get( $breakpoints, $breakpoint ) } ) {
+            @content;
+        }
+    } @else if
+        type_of($breakpoint) ==
+        number and
+        unit($breakpoint) ==
+        px or
+        unit($breakpoint) ==
+        em or
+        unit($breakpoint) ==
+        rem
+    {
+        @media (max-width: $breakpoint) {
+            @content;
+        }
+    } @else {
+        @warn "No value could be retrieved from `#{$breakpoint}`. "
+               + "It is either not defined in the `$breakpoints` map, or it is an invalid number of px, em, or rem.";
+    }
+}
+// media query mixin
+@mixin break($size) {
+    @media (min-width: map-get($breakpoints, $size)) {
+        @content;
+    }
+}
+
+// number of columns variable
+$items: 12;
+
+// grid container
+.row {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+// loop over the breakpoints
+@each $key, $value in $breakpoints {
+    @for $i from 1 through $items {
+        .col-#{$key}-#{$i} {
+            flex: 0 0 100%;
+            @include break($key) {
+                flex: 0 0 #{$i / $items * 100%};
+            }
+        }
+    }
+}

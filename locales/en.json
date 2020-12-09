@@ -1,0 +1,19 @@
+{
+  "links": {
+    "home": "Home",
+    "shop": "Shop",
+    "services": "Services",
+    "blog": "Blog",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "shop": {
+    "breadcrumb-root": "Shop",
+    "categorie-all": "All",
+    "categorie-icon": "Icons",
+    "categorie-mockup": "Mockups",
+    "categorie-uikit": "Ui Kits",
+    "categorie-freebie": "Freebies",
+    "categorie-apparel": "Apparels"
+  }
+}

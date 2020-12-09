@@ -1,0 +1,10 @@
+{
+  "links": {
+    "home": "Accueil",
+    "shop": "Boutique",
+    "services": "Services",
+    "blog": "Blogue",
+    "about": "À Propos",
+    "contact": "Contact"
+  }
+}

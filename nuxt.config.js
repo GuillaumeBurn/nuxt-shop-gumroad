@@ -23,13 +23,14 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ["@/assets/scss/main.scss"],
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
     { src: "~/plugins/axios", mode: "server" },
-    { src: "~/plugins/lottie", mode: "client" }
+    { src: "~/plugins/lottie", mode: "client" },
+    { src: "~/plugins/i18n.js" }
   ],
   /*
    ** Nuxt.js dev-modules
@@ -41,8 +42,12 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     "@nuxtjs/axios",
-    "@nuxtjs/proxy"
+    "@nuxtjs/proxy",
+    "@nuxtjs/style-resources"
   ],
+  styleResources: {
+    scss: ["assets/scss/abstracts/_variables.scss"]
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -57,14 +62,28 @@ module.exports = {
   /*
    ** Build configuration
    */
-  build: {
-    /*
-     ** You can extend webpack config here
-     */
-    extend(config, ctx) {}
-  },
+  build: { vendor: ["vue-i18n"] },
   serverMiddleware: [
     // Will register file from project api directory to handle /api/* requires
     { path: "/api/contact", handler: "~/api/index.js" }
-  ]
+  ],
+  router: {
+    middleware: "i18n"
+  },
+  generate: {
+    routes: [
+      "/en",
+      "/en/shop",
+      "/en/services",
+      "/en/blog",
+      "/en/about",
+      "/en/contact",
+      "/fr",
+      "/fr/shop",
+      "/fr/services",
+      "/fr/blog",
+      "/fr/about",
+      "/fr/contact"
+    ]
+  }
 };

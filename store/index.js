@@ -7,6 +7,7 @@ export const state = () => {
     filteredProducts: [],
     product: {},
     blogPost: blogPost.data,
+    locale: "en",
     emailProvider: {
       username: "alberta71@ethereal.email",
       password: "BJgwmJJetZMDqstnwX"
@@ -82,6 +83,9 @@ export const mutations = {
       state.filter.order,
       products
     );
+  },
+  SET_LANG(state, locale) {
+    state.locale = locale;
   }
 };
 
