@@ -6,7 +6,6 @@
             role="button"
             @click="$store.dispatch('nav/toggleSidebar')"
         ></div>
-        <div v-if="isSidebar" class="backdrop" @click="hideSidebar"></div>
         <transition name="slide-side">
             <div v-if="isSidebar" class="sidenav row">
                 <section class="sidenav__interaction col-md-5">
@@ -252,14 +251,6 @@
                                     {{ $t("links.shop") }}
                                 </nuxt-link>
                             </li>
-                            <!-- <li class="mainNav__item" @click="hideSidebar">
-                            <nuxt-link
-                                class="mainNav__link hover__link"
-                                :to="'/' + $i18n.locale + '/services'"
-                            >
-                                {{ $t("links.services") }}
-                            </nuxt-link>
-                        </li> -->
                             <li class="mainNav__item" @click="hideSidebar">
                                 <span class="mainNav__number">03</span>
                                 <nuxt-link
@@ -303,186 +294,175 @@
 </template>
 <style lang="scss">
 .dark-theme {
-    .drawer.mainNav {
-        .mainNav__link {
-            color: $black-1;
-        }
+  .drawer.mainNav {
+    .mainNav__link {
+      color: $black-1;
     }
+  }
+  .burger-menu {
+    path {
+      stroke: #fff;
+    }
+  }
+  .sidenav-container.active {
     .burger-menu {
-        path {
-            stroke: #fff;
-        }
+      path {
+        stroke: #000;
+      }
     }
-    .sidenav-container.active {
-        .burger-menu {
-            path {
-                stroke: #000;
-            }
-        }
-    }
+  }
 }
 .dark-theme,
 .blog-post {
-    .drawer-toggle .bar {
-        background-color: $white-1;
-    }
+  .drawer-toggle .bar {
+    background-color: $white-1;
+  }
 }
 .blog-post {
-    .blog-header.dark {
-        .drawer-toggle .bar {
-            background-color: $black-1;
-        }
+  .blog-header.dark {
+    .drawer-toggle .bar {
+      background-color: $black-1;
     }
-    .burger-menu {
-        path {
-            stroke: #fff;
-        }
+  }
+  .burger-menu {
+    path {
+      stroke: #fff;
     }
+  }
 }
 #burgerMenu {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-    height: 50px;
-    width: 50px;
-    top: 24px;
-    right: 24px;
-    position: fixed;
-    z-index: 103;
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+  height: 50px;
+  width: 50px;
+  top: 24px;
+  right: 24px;
+  position: fixed;
+  z-index: 103;
 }
 .sidenav-container {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 .sidenav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 102;
+  $self: &;
+  &__interaction {
     display: flex;
-    align-items: center;
     justify-content: center;
     background-color: $white-1;
-    box-sizing: border-box;
     position: fixed;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 102;
-    $self: &;
-    &__interaction {
-        display: flex;
-        justify-content: center;
-        height: 100%;
-        .abstract-klarr {
-            width: 80%;
-        }
+    left: 0;
+    width: 42%;
+    bottom: -100%;
+    height: 100vh;
+    .abstract-klarr {
+      width: 80%;
     }
-    &__content {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        border-left: 1px solid #ced6e0;
-        position: relative;
-        height: 100%;
-        .address {
-            display: none;
-        }
-        .mainNav {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-        }
-        #{$self}__social {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            margin-bottom: 24px;
-            padding-right: 24px;
-            width: 100%;
-            .switch-wrapper {
-                margin-left: 64px;
-            }
-            .switch__label {
-                color: $black-1;
-                &.nuxt-link-exact-active {
-                    color: $primary-color;
-                }
-            }
-        }
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-left: 1px solid #ced6e0;
+    background-color: $white-1;
+    right: -80%;
+    position: fixed;
+    position: relative;
+    height: 100vh;
+    .address {
+      display: none;
     }
-
     .mainNav {
-        position: absolute;
-        top: 50%;
-        right: 45%;
-        transform: translate(-50%, -50%);
-        &__list {
-            display: flex;
-            flex-direction: column;
-            padding: 0;
-            list-style-type: none;
-            align-items: center;
-            flex-wrap: wrap;
-            height: 236px;
-            width: 82%;
-        }
-        &__item {
-            display: flex;
-            align-items: center;
-            position: relative;
-            margin: 1.5rem 16px;
-        }
-        &__number {
-            position: absolute;
-            top: 0;
-            left: -24px;
-        }
-        &__link {
-            display: flex;
-            color: $black-1;
-            text-decoration: none;
-            font-size: 56px;
-            font-family: $merriweather;
-            font-weight: $size-black;
-            mix-blend-mode: overlay;
-            .letter {
-                display: inline-block;
-                line-height: 1em;
-            }
-            &:hover {
-                font-weight: 800;
-                transform: scale(1.2);
-            }
-        }
-        .nuxt-link-exact-active {
-            font-weight: 800;
-            &:hover {
-                transform: scale(1);
-            }
-        }
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
     }
+    #{$self}__social {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-bottom: 24px;
+      padding-right: 24px;
+      width: 100%;
+      .switch-wrapper {
+        margin-left: 64px;
+      }
+      .switch__label {
+        color: $black-1;
+        &.nuxt-link-exact-active {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  .mainNav {
+    position: absolute;
+    top: 50%;
+    right: 45%;
+    transform: translate(-50%, -50%);
+    &__list {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      list-style-type: none;
+      align-items: center;
+      flex-wrap: wrap;
+      height: 236px;
+      width: 82%;
+    }
+    &__item {
+      display: flex;
+      align-items: center;
+      position: relative;
+      margin: 1.5rem 16px;
+    }
+    &__number {
+      position: absolute;
+      top: 0;
+      left: -24px;
+    }
+    &__link {
+      display: flex;
+      color: $black-1;
+      text-decoration: none;
+      font-size: 56px;
+      font-family: $merriweather;
+      font-weight: $size-black;
+      mix-blend-mode: overlay;
+      .letter {
+        display: inline-block;
+        line-height: 1em;
+      }
+      &:hover {
+        font-weight: 800;
+        transform: scale(1.2);
+      }
+    }
+    .nuxt-link-exact-active {
+      font-weight: 800;
+      &:hover {
+        transform: scale(1);
+      }
+    }
+  }
 }
-.slide-side-enter-active {
-    transition: all 1s cubic-bezier(0.07, 0.68, 0.09, 1);
-}
-.slide-side-leave-active {
-    transition: all 1s cubic-bezier(0.88, 0.01, 0.35, 1);
-}
-.slide-side-enter,
-.slide-side-leave-to {
-    transform: translateX(100%);
-}
-.backdrop {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(244, 245, 246, 0.5);
-    z-index: 100;
-    position: fixed;
-    top: 0;
-    right: 0;
-}
+
 @media (max-width: 714px) {
-    .sidenav {
-        width: 100%;
-    }
+  .sidenav {
+    width: 100%;
+  }
 }
 </style>
 <script>
@@ -490,125 +470,121 @@ import Nav from "@/layouts/partials/nav";
 import SocialMedia from "@/components/SocialMedia";
 import InputSwitch from "@/components/InputSwitch";
 import { mapGetters } from "vuex";
-import TweenMax from "gsap";
+import { TweenMax, Expo } from "gsap";
 import lottie from "@/plugins/lottie";
 import anime from "animejs";
 import burgerMenu from "~/static/animation/menu.json";
 
 export default {
-    head() {
-        return {
-            script: [
-                {
-                    src:
-                        "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"
-                },
-                {
-                    src:
-                        "https://cdn.jsdelivr.net/gh/WojciechWKROPCE/letterize-js/lib/letterize.min.js"
-                }
-            ]
-        };
-    },
-    components: { Nav, SocialMedia, InputSwitch },
-    data() {
-        return {
-            direction: "horizontal",
-            iconColor: "#e5204d"
-        };
-    },
-    methods: {
-        hideSidebar() {
-            this.$store.dispatch("nav/toggleSidebar");
+  head() {
+    return {
+      script: [
+        {
+          src:
+            "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"
+        },
+        {
+          src:
+            "https://cdn.jsdelivr.net/gh/WojciechWKROPCE/letterize-js/lib/letterize.min.js"
         }
-    },
-    computed: {
-        isSidebar() {
-            return this.$store.getters["nav/toggleSidebar"];
-        }
-    },
-    mounted() {
-        var link = document.querySelectorAll(".mainNav__link");
+      ]
+    };
+  },
+  components: { Nav, SocialMedia, InputSwitch },
+  data() {
+    return {
+      direction: "horizontal",
+      iconColor: "#e5204d"
+    };
+  },
+  methods: {
+    hideSidebar() {
+      this.$store.dispatch("nav/toggleSidebar");
+    }
+  },
+  computed: {
+    isSidebar() {
+      return this.$store.getters["nav/toggleSidebar"];
+    }
+  },
+  mounted() {
+    var link = document.querySelectorAll(".mainNav__link");
 
-        link.forEach(function(elem) {
-            $(document).on("mousemove touch", function(e) {
-                magnetize(elem, e);
-            });
+    link.forEach(function(elem) {
+      $(document).on("mousemove touch", function(e) {
+        magnetize(elem, e);
+      });
+    });
+
+    function magnetize(el, e) {
+      var mX = e.pageX,
+        mY = e.pageY;
+      const item = $(el);
+
+      const customDist = item.data("dist") * 20 || 80;
+      const centerX = item.offset().left + item.width() / 2;
+      const centerY = item.offset().top + item.height() / 2;
+
+      var deltaX = Math.floor(centerX - mX) * -0.35;
+      var deltaY = Math.floor(centerY - mY) * -0.35;
+
+      var distance = calculateDistance(item, mX, mY);
+
+      if (distance < customDist) {
+        TweenMax.to(item, 0.5, {
+          y: deltaY,
+          x: deltaX,
+          scale: 1
         });
-
-        function magnetize(el, e) {
-            var mX = e.pageX,
-                mY = e.pageY;
-            const item = $(el);
-
-            const customDist = item.data("dist") * 20 || 80;
-            const centerX = item.offset().left + item.width() / 2;
-            const centerY = item.offset().top + item.height() / 2;
-
-            var deltaX = Math.floor(centerX - mX) * -0.35;
-            var deltaY = Math.floor(centerY - mY) * -0.35;
-
-            var distance = calculateDistance(item, mX, mY);
-
-            if (distance < customDist) {
-                TweenMax.to(item, 0.5, {
-                    y: deltaY,
-                    x: deltaX,
-                    scale: 1
-                });
-                item.addClass("magnet");
-            } else {
-                TweenMax.to(item, 0.6, {
-                    y: 0,
-                    x: 0,
-                    scale: 1
-                });
-                item.removeClass("magnet");
-            }
-        }
-
-        function calculateDistance(elem, mouseX, mouseY) {
-            return Math.floor(
-                Math.sqrt(
-                    Math.pow(
-                        mouseX - (elem.offset().left + elem.width() / 2),
-                        2
-                    ) +
-                        Math.pow(
-                            mouseY - (elem.offset().top + elem.height() / 2),
-                            2
-                        )
-                )
-            );
-        }
-
-        const container = document.querySelector(".sidenav-container");
-        const params = {
-            container: document.getElementById("burgerMenu"),
-            renderer: "svg",
-            path: "",
-            loop: false,
-            autoplay: false,
-            animationData: burgerMenu
-        };
-        var anim;
-        anim = lottie.loadAnimation(params);
-
-        $("#burgerMenu").click(function() {
-            if (container.classList.contains("active") !== true) {
-                anim.setDirection(1);
-                anim.play();
-                container.classList.add("active");
-                $(this).removeClass("dark");
-            } else if (container.classList.contains("active")) {
-                anim.setDirection(-1);
-                anim.play();
-                container.classList.remove("active");
-            }
+        item.addClass("magnet");
+      } else {
+        TweenMax.to(item, 0.6, {
+          y: 0,
+          x: 0,
+          scale: 1
         });
+        item.removeClass("magnet");
+      }
+    }
+
+    function calculateDistance(elem, mouseX, mouseY) {
+      return Math.floor(
+        Math.sqrt(
+          Math.pow(mouseX - (elem.offset().left + elem.width() / 2), 2) +
+            Math.pow(mouseY - (elem.offset().top + elem.height() / 2), 2)
+        )
+      );
+    }
+
+    const container = document.querySelector(".sidenav-container");
+    const params = {
+      container: document.getElementById("burgerMenu"),
+      renderer: "svg",
+      path: "",
+      loop: false,
+      autoplay: false,
+      animationData: burgerMenu
+    };
+    var anim;
+    anim = lottie.loadAnimation(params);
+
+    $("#burgerMenu").click(function() {
         const obj = new Letterize({
-            targets: document.querySelectorAll(".mainNav__link"),
-            className: "letter"
+        targets: document.querySelectorAll(".mainNav__link"),
+        className: "letter"
+        });
+      if (container.classList.contains("active") !== true) {
+        anim.setDirection(1);
+        anim.play();
+        container.classList.add("active");
+        $(this).removeClass("dark");
+        TweenMax.to(".sidenav__content", 2, {
+          right: "-21%",
+          ease: Expo.easeInOut
+        });
+        TweenMax.to(".sidenav__interaction", 2, {
+          bottom: "0",
+          ease: Expo.easeInOut
         });
         anime.timeline().add({
             targets: ".mainNav__link .letter",
@@ -617,8 +593,26 @@ export default {
             opacity: [0, 1],
             easing: "easeOutExpo",
             duration: 2000,
-            delay: (el, i) => 4800 + 50 * i
+            delay: (el, i) => 1000 + 50 * i
         });
-    }
+      } else if (container.classList.contains("active")) {
+        anim.setDirection(-1);
+        anim.play();
+        container.classList.remove("active");
+        TweenMax.from(".sidenav__content", 2, {
+          right: "-80%",
+          ease: Expo.easeInOut,
+          delay: 1
+        });
+        TweenMax.from(".sidenav__interaction", 2, {
+          bottom: "-100%",
+          ease: Expo.easeInOut,
+          delay: 1
+        });
+      }
+    });
+
+
+  }
 };
 </script>
