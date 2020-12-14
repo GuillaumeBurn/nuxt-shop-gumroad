@@ -231,6 +231,7 @@
                     </svg>
                 </section>
                 <section class="sidenav__content col-md-7">
+                  <div class="navWrapper">
                     <nav class="mainNav">
                         <ul class="mainNav__list">
                             <li class="mainNav__item" @click="hideSidebar">
@@ -280,6 +281,7 @@
                             </li>
                         </ul>
                     </nav>
+                  </div>
                     <div class="sidenav__social">
                         <SocialMedia
                             :direction="direction"
@@ -375,10 +377,10 @@
     justify-content: flex-end;
     border-left: 1px solid #ced6e0;
     background-color: $white-1;
-    right: -80%;
+    right: -100%;
     position: fixed;
-    position: relative;
     height: 100vh;
+    width: 58%;
     .address {
       display: none;
     }
@@ -406,12 +408,17 @@
       }
     }
   }
-
+  .navWrapper {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+  }
   .mainNav {
     position: absolute;
     top: 50%;
-    right: 45%;
+    left: 50%;
     transform: translate(-50%, -50%);
+    width: 100%;
     &__list {
       display: flex;
       flex-direction: column;
@@ -458,10 +465,46 @@
     }
   }
 }
+@media (max-width: 1716px) {
+  .fr {
+    .sidenav {
+      width: 100%;
 
+      .mainNav {
+        &__list {
+          flex-wrap: nowrap;
+          height: initial;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1300px) {
+  .sidenav {
+    width: 100%;
+
+    .mainNav {
+      &__list {
+        flex-wrap: nowrap;
+        height: initial;
+      }
+    }
+  }
+}
 @media (max-width: 714px) {
   .sidenav {
     width: 100%;
+    $self: &;
+    &__interaction {
+      display: none;
+    }
+    &__content {
+      width: 100%;
+      #{$self}__social {
+        justify-content: center;
+        padding-right: 0;
+      }
+    }
   }
 }
 </style>
@@ -579,7 +622,7 @@ export default {
         container.classList.add("active");
         $(this).removeClass("dark");
         TweenMax.to(".sidenav__content", 2, {
-          right: "-21%",
+          right: "0",
           ease: Expo.easeInOut
         });
         TweenMax.to(".sidenav__interaction", 2, {

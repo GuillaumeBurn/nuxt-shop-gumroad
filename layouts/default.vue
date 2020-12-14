@@ -3,7 +3,8 @@
     :class="{
       'dark-theme': hasDark,
       'light-theme': !hasDark,
-      'blog-post': isBlogPost
+      'blog-post': isBlogPost,
+      fr: french
     }"
   >
     <Header />
@@ -22,7 +23,8 @@ export default {
   data() {
     return {
       hasDark: false,
-      isBlogPost: false
+      isBlogPost: false,
+      french: false
     };
   },
   created() {
@@ -41,8 +43,11 @@ export default {
   },
   methods: {
     routeChanged() {
-      this.hasDark = this.$route.path === `/contact`;
-      this.isBlogPost = this.$route.path === `/blog/${this.$route.params.id}`;
+      this.hasDark = this.$route.path === `/${this.$i18n.locale}/contact`;
+      this.isBlogPost =
+        this.$route.path ===
+        `/${this.$i18n.locale}/blog/${this.$route.params.id}`;
+      this.french = this.$i18n.locale === `fr`;
     }
   }
 };
