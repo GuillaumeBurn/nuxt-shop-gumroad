@@ -2,7 +2,12 @@
   <div class="switch-wrapper">
     <nuxt-link class="switch__label" :to="'/fr/' + page_path">Fr</nuxt-link>
     <label class="switch">
-      <input @click="switchState" class="lang-switch" type="checkbox" />
+      <input
+        @click="switchState"
+        class="lang-switch"
+        type="checkbox"
+        v-model="checked"
+      />
       <span class="slider round"></span>
     </label>
     <nuxt-link class="switch__label" :to="'/en/' + page_path">En</nuxt-link>
@@ -88,25 +93,35 @@ input:checked + .slider:before {
 export default {
   data() {
     return {
-      page_path: this.$route.name.replace("lang-", "")
+      page_path: this.getPageName(),
+      checked: this.$i18n.locale === "en"
     };
   },
-  mounted() {
-    if (this.$i18n.locale === "en") {
-      $(".lang-switch").prop("checked", true);
-    } else if (this.$i18n.locale === "fr") {
-      $(".lang-switch").prop("checked", false);
+  watch: {
+    "$i18n.locale": {
+      handler(newVal, oldVal) {
+        this.checked = newVal === "en";
+      }
     }
   },
   methods: {
+    getPageName() {
+      const parts = this.$route.path.split("/");
+      const pageName = parts[parts.length - 1];
+      if (pageName !== this.$route.params.lang) {
+        return pageName;
+      } else {
+        return "";
+      }
+    },
     switchState() {
-      let pageRoute = this.$route.name.replace("lang-", "");
+      let page = this.getPageName();
       if (this.$i18n.locale === "en") {
-        $(".lang-switch").prop("checked", true);
-        this.$router.push({ path: `/fr/${pageRoute}` });
+        this.$i18n.locale = "fr";
+        this.$router.push({ path: `/fr/${page}` });
       } else if (this.$i18n.locale === "fr") {
-        $(".lang-switch").prop("checked", false);
-        this.$router.push({ path: `/en/${pageRoute}` });
+        this.$i18n.locale = "en";
+        this.$router.push({ path: `/en/${page}` });
       }
     }
   }
