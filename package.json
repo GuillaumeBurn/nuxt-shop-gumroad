@@ -19,7 +19,7 @@
     "express": "^4.16.4",
     "gsap": "file:gsap-bonus.tgz",
     "lottie-web": "^5.7.4",
-    "nodemailer": "^6.4.11",
+    "nodemailer": "^6.4.16",
     "nuxt": "^2.0.0",
     "vue-i18n": "^8.20.0"
   },
