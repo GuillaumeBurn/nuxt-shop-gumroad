@@ -8,10 +8,6 @@ export const state = () => {
     product: {},
     blogPost: blogPost.data,
     locale: "en",
-    emailProvider: {
-      username: "alberta71@ethereal.email",
-      password: "BJgwmJJetZMDqstnwX"
-    },
     filter: {
       search: "",
       order: "1",
@@ -35,9 +31,6 @@ export const getters = {
     state.products.filter(el => el.custom_summary === "Apparels"),
   freebies: state =>
     state.products.filter(el => el.custom_summary === "Freebies"),
-  emailProvider(state) {
-    return state.emailProvider;
-  },
   getFilteredProducts(state) {
     return state.filteredProducts;
   },
@@ -108,17 +101,13 @@ export const actions = {
   },
   async sendEmail({ state, commit }, payload) {
     let emailInfo = payload;
-    let emailProvider = state.emailProvider;
-    if (emailProvider.username !== "" && emailProvider.password !== "") {
-      try {
-        const { res } = await this.$axios.post("/api/contact", {
-          emailInfo,
-          emailProvider
-        });
-        alert("Message send successfully");
-      } catch (e) {
-        alert(e);
-      }
+    try {
+      const { res } = await this.$axios.post("/api/contact", {
+        emailInfo
+      });
+      alert("Message send successfully");
+    } catch (e) {
+      alert(e);
     }
   },
   async filterOrder({ commit, dispatch }, order) {

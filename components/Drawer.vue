@@ -1,5 +1,5 @@
 <template>
-  <div class="sidenav-container">
+  <div :class="{ active:checkSidebar() }" class="sidenav-container">
     <div
       class="burger-menu interactive-element"
       id="burgerMenu"
@@ -537,6 +537,9 @@ export default {
     };
   },
   methods: {
+    checkSidebar() {
+      return this.isSidebar;
+    },
     hideSidebar() {
       this.$store.dispatch("nav/toggleSidebar");
     },
