@@ -1,10 +1,21 @@
 <template>
   <form>
-    <fieldset v-for="input in inputs">
-        <InputField :labelTitle="input.labelTitle" :id="input.idName" :name="input.name" :placeholder="input.placeHolder" :type="input.type" v-on:changeValue="input.method($event)" />
+    <fieldset v-for="input in inputs" :key="input.idName">
+      <InputField
+        :labelTitle="input.labelTitle"
+        :id="input.idName"
+        :name="input.name"
+        :placeholder="input.placeHolder"
+        :type="input.type"
+        v-on:changeValue="input.method($event)"
+      />
     </fieldset>
-    <fieldset v-for="content in area">
-        <InputArea :labelTitle="content.labelTitle" :name="content.name" v-on:changeValue="content.method($event)" />
+    <fieldset v-for="content in area" :key="content.labelTitle">
+      <InputArea
+        :labelTitle="content.labelTitle"
+        :name="content.name"
+        v-on:changeValue="content.method($event)"
+      />
     </fieldset>
     <button type="button" value="Send" @click="sendEmail()">Submit</button>
   </form>
@@ -96,7 +107,7 @@ export default {
           placeHolder: "Your Name",
           styling: "underline",
           data: "",
-          method: function(e) {
+          method: function (e) {
             this.data = e;
           },
         },
@@ -108,9 +119,9 @@ export default {
           styling: "underline",
           type: "email",
           data: "",
-          method: function(e) {
+          method: function (e) {
             this.data = e;
-          }
+          },
         },
       ],
       area: [
@@ -119,9 +130,9 @@ export default {
           labelTitle: "Project Details",
           styling: "outline",
           data: "",
-          method: function(e) {
+          method: function (e) {
             this.data = e;
-          }
+          },
         },
       ],
     };
