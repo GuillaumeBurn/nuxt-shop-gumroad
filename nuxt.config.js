@@ -43,10 +43,16 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     "@nuxtjs/axios",
     "@nuxtjs/proxy",
-    "@nuxtjs/style-resources"
+    "@nuxtjs/style-resources",
+    "@nuxtjs/recaptcha"
   ],
   styleResources: {
     scss: ["assets/scss/abstracts/_variables.scss"]
+  },
+  recaptcha: {
+    hideBadge: true,
+    siteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+    version: 3,
   },
   /*
    ** Axios module configuration
@@ -85,5 +91,9 @@ module.exports = {
       "/fr/about",
       "/fr/contact"
     ]
-  }
+  },
+  server: {
+    port: "3033"
+  },
+  telemetry: false
 };

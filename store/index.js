@@ -102,7 +102,9 @@ export const actions = {
   async sendEmail({ state, commit }, payload) {
     let emailInfo = payload;
     try {
+      const token = await this.$recaptcha.execute('sendEmail');
       const { res } = await this.$axios.post("/api/contact", {
+        token,
         emailInfo
       });
       alert("Message send successfully");
