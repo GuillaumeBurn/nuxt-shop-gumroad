@@ -20,13 +20,13 @@
         "gsap": "file:gsap-bonus.tgz",
         "lottie-web": "^5.7.4",
         "nodemailer": "^6.4.16",
-        "nuxt": "^2.15.7",
+        "nuxt": "^3.0.0",
         "vue-i18n": "^8.20.0"
     },
     "devDependencies": {
         "@nuxtjs/style-resources": "^1.0.0",
         "node-sass": "^4.14.1",
         "nodemon": "^1.18.9",
-        "sass-loader": "^8.0.2"
+        "sass-loader": "^13.2.0"
     }
 }
